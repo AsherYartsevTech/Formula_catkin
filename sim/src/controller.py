@@ -9,9 +9,21 @@ import airsim
 
 import rospy
 import tf
+
+# imports for Control team
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
-from custom_msgs.msg import pp_msg 
+from geometry_msgs.msg import Pose2D
+
+from custom_msgs.msg import *
+
+
+
+# imports for OrbSlam
+from sensor_msgs.msg import CompressedImage
+
+
+
 import time
 from simulationClass.simulationClass import Simulation
 
@@ -27,16 +39,22 @@ sim = Simulation()
 
 
 #asher todo: extract to config file
-publisherInput = { "airsimPose" : {
-                                    "data_class" : PoseStamped , 
+publisherInput = { "carPoseForPurePursuit" : {
+                                    "data_class" : Pose2D,
                                     "queue_size": 10,
-                                    "handler" : publish_airsimPose,
+                                    "handler" : publish_carPoseForPurePursuit,
                                     "handler_args" : sim
                                     },
                   "test" : {
                             "data_class" : String , 
                             "queue_size": 1,
                             "handler" : publish_test,
+                            "handler_args" : sim
+                            },
+                  "camera/image_raw" : {
+                            "data_class" : CompressedImage ,
+                            "queue_size": 1,
+                            "handler" : publish_RealAndSegImageData,
                             "handler_args" : sim
                             }
                   }
@@ -78,6 +96,7 @@ def simControl():
 
 if __name__ == '__main__':
     try:
+
         simControl()
     except rospy.ROSInterruptException:
         pass
