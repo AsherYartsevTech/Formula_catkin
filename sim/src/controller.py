@@ -6,25 +6,15 @@ sys.path.append('/home/afst/Desktop/FormulaProjectUE18_4/Formula_Data/Data_Dev/'
 
 import setup_path
 import airsim
-
 import rospy
 import tf
 
 # imports for Control team
 from std_msgs.msg import String
-from geometry_msgs.msg import PoseStamped
-from geometry_msgs.msg import Pose2D
-
 from custom_msgs.msg import *
-
-
 
 # imports for OrbSlam
 from sensor_msgs.msg import CompressedImage
-
-
-
-import time
 from simulationClass.simulationClass import Simulation
 
 from subscriber_callbacks import *
@@ -59,8 +49,8 @@ publisherInput = { "carPoseForPurePursuit" : {
                             }
                   }
 
-subscriberInput = { "pp_controller" : {"data_class" : pp_msg , 
-                                       "callback": callback_pp_controller, 
+subscriberInput = { "pp_controller3" : {"data_class" : pp_msg ,
+                                       "callback": callback_pp_controller,
                                        "callback_args" : sim}}
 
 

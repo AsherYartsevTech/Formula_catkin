@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 def callback_pp_controller(msg, sim):
     car_state = sim.client.getCarState()
     print('callback')
